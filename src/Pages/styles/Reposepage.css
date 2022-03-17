@@ -1,0 +1,10 @@
+.nav {
+    margin: auto;
+    width: 40%;
+    text-align: center;
+}
+
+.nav_header {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,94 @@
+h1 {
+    text-align: center;
+}
+
+h6 {
+    margin: 5px;
+}
+
+.home {
+    border-radius: 5px;
+    margin: auto;
+    background-color: aliceblue;
+    width: 40%;
+    padding: 15px;
+    height: max-content;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    text-align: center;
+}
+
+.search>input {
+    border: black solid 1px;
+    margin: 15px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.pageBody {
+    margin: auto;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+
+}
+img {
+    height: 100px;
+}
+
+.info {
+    padding: 0 15px;
+}
+
+.info_inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    border-radius: 15px;
+    background-color: #d48b5a;
+    border: none;
+    padding: 10px 16px;  
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: auto 0;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+p {
+    margin: 0;
+    font-size: 15px;
+    margin: 5px;
+}
+
+.textarea {
+    width: 100%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+  }
+
+input {
+    margin: 3px;
+    border: none;
+}
+
+.btnContainer {
+    margin: 0;
+    padding: 12px 0;
+}
