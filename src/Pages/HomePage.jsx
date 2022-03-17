@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './styles/Homepage.css';
-import {setLocalStorage, getLocalStorage} from '../store/localStorage'
+import {setLocalStorage} from '../store/localStorage'
 
 
 export function HomePage() {

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./styles/Tabs.css";
 import {getLocalStorage} from '../store/localStorage'
-import List from './List'
 
 function Tabs() {
   const [toggleState, setToggleState] = useState(1);
