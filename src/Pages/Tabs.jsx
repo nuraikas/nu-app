@@ -5,44 +5,23 @@ import {getLocalStorage} from '../store/localStorage'
 function Tabs() {
   const [toggleState, setToggleState] = useState(1);
   const [reposes, setReposes] = useState([]);
-  const [reposesUrl, setReposesUrl] = useState([]);
-  const [reposesName, setReposesName] = useState([]);
-  const [reposeUrl, setReposeUrl] = useState('');
   const [storageData, setStorageData] = useState(getLocalStorage())
 
     useEffect(()=>{
         fetch(`https://api.github.com/users/${storageData}`)
         .then(res=>res.json())
         .then(data=> {
-            setUrl(data);
+          fetch(data.repos_url)
+          .then(res=>res.json())
+          .then(data => {
+              setReposes(data)
+          })
         })
     }, []);
 
     useEffect(() => {
-        fetch(`${reposesUrl}`)
-        .then(res=>res.json())
-        .then(data => {
-            data.map(e => {
-                setReposesName(e.name)
-                setReposeUrl(e.html_url)
-                addRepose(reposesName, reposeUrl)
-            })
-        })
+        
     }, [])
-
-    console.log(reposes);
-
-    const addRepose = (reposesName, reposeUrl) => {
-        setReposes([
-            {
-                name: reposesName,
-                url: reposeUrl
-            }
-        ])
-    }
-    const setUrl= ({repos_url}) => {
-        setReposesUrl(repos_url)
-    }
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -66,20 +45,19 @@ function Tabs() {
       </div>
 
       <div className="content-tabs">
-        <div
-          className={toggleState === 1 ? "content  active-content" : "content"}
-        >
-          <p>Я получила данные, но не смогла вывести их на экран(((<br/>
-          <a href={reposesUrl}>Вот ссылка на данные репозиториев</a>
-          </p>
+        <div className={toggleState === 1 ? "content  active-content" : "content"}>
           <ul>
-              {reposesName}
+              {reposes.map(e => {
+                return (
+                  <div className="list_item">
+                    <li><b>{e.name}</b><br/><a href={e.html_url}>{e.html_url}</a></li>
+                  </div>
+                )
+              })}
           </ul>
         </div>
 
-        <div
-          className={toggleState === 2 ? "content  active-content" : "content"}
-        >
+        <div className={toggleState === 2 ? "content  active-content" : "content"} >
           <p>
             No
           </p>

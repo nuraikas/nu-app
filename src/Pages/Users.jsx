@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import './styles/Users.css'
 
 export function Users() {
-    const [userInput, setUserInput] = useState('/')
+    const [userInput, setUserInput] = useState('')
     const [user, setUser] = useState([])
     const [count, setCount] = useState('')
     
@@ -16,8 +16,7 @@ export function Users() {
         .then(res=>res.json())
         .then(data=> {
             setUser(data.items)
-            setCount(data.total_count) 
-            console.log(data.items);       
+            setCount(data.total_count)
         })        
     }, [userInput])
 
@@ -33,7 +32,8 @@ export function Users() {
         </div>
         
         <p>Количество пользователей {count}</p>
-        <ul>
+        {user ? 
+        (<ul>
             {user.map(e => {
                 return (
                 <li key={e.id}>
@@ -41,7 +41,7 @@ export function Users() {
                 </li>
                 )
             })}
-        </ul>
+        </ul>) : (null)}
         </div>
     )
 }

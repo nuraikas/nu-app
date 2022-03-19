@@ -12,9 +12,9 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 500px;
-    height: 300px;
-    background: #f1f1f1;
+    width: 40%;
+    height: max-content;
+    background-color: white;
     margin: auto;
     word-break: break-all;
     border: 1px solid rgba(0, 0, 0, 0.274);
@@ -24,11 +24,10 @@
     display: flex;
   }
   .tabs {
-  
     padding: 15px;
     text-align: center;
     width: 50%;
-    background: rgba(128, 128, 128, 0.075);
+    background-color: white;
     cursor: pointer;
     border-bottom: 1px solid rgba(0, 0, 0, 0.274);
     box-sizing: content-box;
@@ -40,7 +39,7 @@
   }
   
   .active-tabs  {
-    background: white;
+    background-color: aliceblue;
     border-bottom: 1px solid transparent;
   }
   
@@ -63,7 +62,7 @@
     flex-grow : 1;
   }
   .content {
-    background: white;
+    background-color: aliceblue;
     padding: 20px;
     width: 100%;
     height: 100%;
@@ -72,15 +71,21 @@
   .content h2 {
     padding: 0px 0 5px 0px;
   }
-  .content hr {
-    width: 100px;
-    height: 2px;
-    background: #222;
-    margin-bottom: 5px;
-  }
+
   .content p {
     width: 100%;
   }
   .active-content {
     display: block;
+  }
+
+  .list_item {
+    margin: 5px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+  }
+  
+  .list_item>li {
+    list-style: none;
   }
