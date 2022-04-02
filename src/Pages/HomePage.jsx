@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './styles/Homepage.css';
+import {Navigate} from 'react-router-dom'
 import {setLocalStorage} from '../store/localStorage'
-
+import { AuthContext } from "../App";
 
 export function HomePage() {
+    const { state, dispatch } = useContext(AuthContext);
 
     const [name, setName] = useState('')
     const [login, setLogin] = useState('')
@@ -16,17 +18,6 @@ export function HomePage() {
     const [error, setError] = useState('')
     const [inputData, setInputData] = useState('')
     const [userInput, setUserInput] = useState('')
-
-    
-    // useEffect(()=>{
-    //     fetch(`https://api.github.com/users/example`)
-    //     .then(res=>res.json())
-    //     .then(data=> {
-    //         setData(data);
-    //     })
-    // }, []);
-
-
 
     const handleSearch = (e) => {
         setUserInput(e.target.value)
@@ -87,6 +78,11 @@ export function HomePage() {
         setBio(inputData)
         setInputData('')
     }
+
+    if (!state.isLoggedIn) {
+        return <Navigate replace to="/login" />;
+    }
+    
     return (
         <div className='home'>
         <h1>Home</h1>

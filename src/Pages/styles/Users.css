@@ -5,3 +5,7 @@ ul {
 a {
     cursor: pointer;
 }
+
+.home {
+    text-align: center;
+}

@@ -6,29 +6,28 @@ export function Users() {
     const [user, setUser] = useState([])
     const [count, setCount] = useState('')
     
-    //https://api.github.com/search/users?q=abc
     const handleSearch = (e) => {
         setUserInput(e.target.value)
     }
 
+    async function fetchData () {
+        let result = await fetch(`https://api.github.com/search/users/q=${userInput}`)
+    }
+
     useEffect(() => {
-        fetch('https://api.github.com/search/users?q=' + userInput)
+        fetchData()
         .then(res=>res.json())
         .then(data=> {
             setUser(data.items)
             setCount(data.total_count)
-        })        
+        })
     }, [userInput])
-
 
     return (
         <div className='home'>
         <h1>Users</h1>
         <div className='search'>
             <input type="search" placeholder='Search' onChange={handleSearch}/>
-            <div className='btnContainer'>
-                <button></button>
-            </div>
         </div>
         
         <p>Количество пользователей {count}</p>
