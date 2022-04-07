@@ -5,8 +5,22 @@ import {getLocalStorage} from '../store/localStorage'
 function Tabs() {
   const [toggleState, setToggleState] = useState(1);
   const [reposes, setReposes] = useState([]);
+  const [reposesPrivate, setReposesPrivate] = useState([]);
   const [storageData, setStorageData] = useState(getLocalStorage())
 
+  async function fetchReposPrivate(){
+    const headers = {
+      "Authorization" : `Token ${process.env.PERSONAL_ACCESS_TOKEN}`
+    }
+    const url = `https://api.github.com/user/repos?q=type:private`
+    const response = await fetch(url, {
+      "method": "GET",
+      "headers" : headers
+    })
+    const result = await response.json()
+    console.log(result);
+    setReposesPrivate(result)
+  }
     useEffect(()=>{
         fetch(`https://api.github.com/users/${storageData}`)
         .then(res=>res.json())
@@ -17,6 +31,7 @@ function Tabs() {
               setReposes(data)
           })
         })
+        fetchReposPrivate()
     }, []);
 
     useEffect(() => {
@@ -59,7 +74,15 @@ function Tabs() {
 
         <div className={toggleState === 2 ? "content  active-content" : "content"} >
           <p>
-            No
+          <ul>
+              {reposesPrivate.map(e => {
+                return (
+                  <div className="list_item">
+                    <li><b>{e.name}</b><br/><a href={e.html_url}>{e.html_url}</a></li>
+                  </div>
+                )
+              })}
+          </ul>
           </p>
         </div>
 

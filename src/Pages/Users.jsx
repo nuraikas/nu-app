@@ -15,7 +15,6 @@ export function Users() {
         const url = `https://api.github.com/search/users?q=${userInput}`
         const response = await fetch(url)
         const result = await response.json()
-        console.log(result);
         setCount(result.total_count)
         setUser(result.items)
     }
