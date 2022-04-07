@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import "./styles/Tabs.css";
-import {getLocalStorage} from '../store/localStorage'
+import { AuthContext } from "../App";
 
 function Tabs() {
   const [toggleState, setToggleState] = useState(1);
   const [reposes, setReposes] = useState([]);
   const [reposesPrivate, setReposesPrivate] = useState([]);
-  const [storageData, setStorageData] = useState(getLocalStorage())
+  const { state, dispatch } = useContext(AuthContext);
+  const {name} = state.user;
+
 
   async function fetchReposPrivate(){
     const headers = {
@@ -22,7 +24,7 @@ function Tabs() {
     setReposesPrivate(result)
   }
     useEffect(()=>{
-        fetch(`https://api.github.com/users/${storageData}`)
+        fetch(`https://api.github.com/users/${name}`)
         .then(res=>res.json())
         .then(data=> {
           fetch(data.repos_url)

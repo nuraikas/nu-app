@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { Routes, Route, Link, BrowserRouter as Router} from 'react-router-dom';
+import { Routes, Route, Link} from 'react-router-dom';
 import { HomePage } from './Pages/HomePage';
 import { ReposPage } from './Pages/ReposPage';
 import { Users } from './Pages/Users'
