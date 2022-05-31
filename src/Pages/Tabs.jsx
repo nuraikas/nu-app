@@ -1,14 +1,16 @@
-import { useState, useEffect,useContext } from "react";
+import { useState, useEffect } from "react";
 import "./styles/Tabs.css";
-import { AuthContext } from "../App";
+import { setLocalStorage, getLocalStorage } from '../store/localStorage';
 
-function Tabs() {
+function Tabs() { 
+  const [reposesUrl, setReposesUrl] = useState([]);
+  const [reposesName, setReposesName] = useState([]);
+  const [reposeUrl, setReposeUrl] = useState('');
+
   const [toggleState, setToggleState] = useState(1);
   const [reposes, setReposes] = useState([]);
   const [reposesPrivate, setReposesPrivate] = useState([]);
-  const { state, dispatch } = useContext(AuthContext);
-  const {name} = state.user;
-
+  const [storageData, setStorageData] = useState(getLocalStorage())
 
   async function fetchReposPrivate(){
     const headers = {
@@ -23,22 +25,40 @@ function Tabs() {
     console.log(result);
     setReposesPrivate(result)
   }
+
     useEffect(()=>{
-        fetch(`https://api.github.com/users/${name}`)
+        fetch(`https://api.github.com/users/${storageData}`)
         .then(res=>res.json())
         .then(data=> {
-          fetch(data.repos_url)
-          .then(res=>res.json())
-          .then(data => {
-              setReposes(data)
-          })
+            setUrl(data);
         })
-        fetchReposPrivate()
     }, []);
 
     useEffect(() => {
-        
+        fetch(`${reposesUrl}`)
+        .then(res=>res.json())
+        .then(data => {
+            data.map(e => {
+                setReposesName(e.name)
+                setReposeUrl(e.html_url)
+                addRepose(reposesName, reposeUrl)
+            })
+        })
     }, [])
+
+    console.log(reposes);
+
+    const addRepose = (reposesName, reposeUrl) => {
+        setReposes([
+            {
+                name: reposesName,
+                url: reposeUrl
+            }
+        ])
+    }
+    const setUrl= ({repos_url}) => {
+        setReposesUrl(repos_url)
+    }
 
   const toggleTab = (index) => {
     setToggleState(index);
